@@ -1,221 +1,240 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Trung Tâm Nạp Game</title>
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-body{
-background:#0f172a;
-color:white;
-}
-header{
-background:#000;
-padding:15px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
-}
-.banner{
-height:180px;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#1e3a8a,#111827);
-font-size:32px;
-font-weight:bold;
-color:#facc15;
-}
-.container{
-max-width:800px;
-margin:20px auto;
-padding:15px;
-}
-.card{
-background:#fff;
-color:#000;
-padding:20px;
-border-radius:15px;
-margin-bottom:20px;
-}
-.card h2{
-margin-bottom:15px;
-}
-input{
-width:100%;
-padding:15px;
-border:1px solid #ddd;
-border-radius:10px;
-}
-.packages{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-.package{
-padding:20px;
-border:2px solid #ddd;
-border-radius:10px;
-text-align:center;
-cursor:pointer;
-}
-.package.active{
-border-color:red;
-background:#fff2f2;
-}
-.methods{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-}
-.method{
-padding:15px;
-border:2px solid #ddd;
-border-radius:10px;
-text-align:center;
-cursor:pointer;
-}
-.method.active{
-border-color:red;
-background:#fff2f2;
-}
-.btn{
-width:100%;
-padding:18px;
-background:red;
-color:white;
-border:none;
-border-radius:10px;
-font-size:20px;
-cursor:pointer;
-margin-top:15px;
-}
-.popup{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-}
-.popup-content{
-width:350px;
-background:white;
-color:black;
-padding:25px;
-border-radius:20px;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-}
-.check{
-width:80px;
-height:80px;
-background:#22c55e;
-border-radius:50%;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:45px;
-color:white;
-}
-.ok{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:red;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Nạp Kim Cương Free Fire</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #060b19;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .bg-banner {
+            background: linear-gradient(to bottom, rgba(6, 11, 25, 0.4), #060b19), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200') no-repeat center top;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-<header>TRUNG TÂM NẠP GAME DEMO</header>
-<div class="banner">
-NẠP GAME DEMO
-</div>
-<div class="container">
-<div class="card">
-<h2>1. Nhập UID</h2>
-<input id="uid" placeholder="Nhập UID">
-</div>
-<div class="card">
-<h2>2. Chọn Gói</h2>
-<div class="packages">
-<div class="package active">💎 283 KC</div>
-<div class="package">💎 566 KC</div>
-<div class="package">💎 1132 KC</div>
-<div class="package">💎 2830 KC</div>
-<div class="package">💎 5750 KC</div>
-<div class="package">💎 9999 KC</div>
-</div>
-</div>
-<div class="card">
-<h2>3. Thanh Toán</h2>
-<div class="methods">
-<div class="method active">Thẻ</div>
-<div class="method">Momo</div>
-<div class="method">ATM</div>
-</div>
-<button class="btn" onclick="showPopup()">
-XỬ LÝ DEMO
-</button>
-</div>
-</div>
-<div class="popup" id="popup">
-<div class="popup-content">
-<div class="check">✓</div>
-<h2 style="margin-top:15px;">
-Hoàn tất (Demo)
-</h2>
-<p style="margin-top:10px;">
-UID:
-<b id="uidShow"></b>
-</p>
-<p id="timeShow" style="margin-top:10px;"></p>
-<button class="ok" onclick="closePopup()">
-OK
-</button>
-</div>
-</div>
-<script>
-document.querySelectorAll(".package").forEach(item=>{
-item.onclick=()=>{
-document.querySelectorAll(".package")
-.forEach(x=>x.classList.remove("active"));
-item.classList.add("active");
-};
-});
-document.querySelectorAll(".method").forEach(item=>{
-item.onclick=()=>{
-document.querySelectorAll(".method")
-.forEach(x=>x.classList.remove("active"));
-item.classList.add("active");
-};
-});
-function showPopup(){
-let uid=document.getElementById("uid").value;
-if(!uid){
-alert("Vui lòng nhập UID");
-return;
-}
-document.getElementById("uidShow").innerText=uid;
-document.getElementById("timeShow").innerText=
-new Date().toLocaleString("vi-VN");
-document.getElementById("popup").style.display="block";
-}
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-</script>
+
+    <header class="border-b border-gray-800 bg-[#091024] px-4 py-3 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-black italic tracking-wider text-amber-500">FREE FIRE</span>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-semibold text-gray-300">
+                <a href="#" class="hover:text-amber-400">TRANG CHỦ</a>
+                <a href="#" class="text-amber-400 border-b-2 border-amber-400 pb-1">NẠP KIM CƯƠNG</a>
+                <a href="#" class="hover:text-amber-400">LỊCH SỬ NẠP</a>
+                <a href="#" class="hover:text-amber-400">HƯỚNG DẪN</a>
+            </nav>
+            <div class="flex items-center gap-2 bg-[#121c38] px-3 py-1.5 rounded-full border border-gray-700">
+                <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center font-bold text-black text-sm">FF</div>
+                <div class="text-xs">
+                    <p class="font-bold text-gray-200">DangNhapFF</p>
+                    <p class="text-gray-400">UID: 1234567890</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-banner pt-12 pb-6 px-4 text-center">
+        <h1 class="text-3xl md:text-5xl font-black italic text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 tracking-wide uppercase drop-shadow-lg">
+            Trung Tâm Nạp <br class="md:hidden"> Kim Cương Free Fire
+        </h1>
+        <p class="text-sm md:text-base mt-2 font-semibold text-cyan-400 tracking-widest uppercase">
+            AN TOÀN – TỰ ĐỘNG – NHANH CHÓNG
+        </p>
+    </section>
+
+    <main class="max-w-xl mx-auto px-4 pb-20">
+        <div class="bg-white text-gray-800 rounded-2xl shadow-2xl p-6 space-y-6">
+            
+            <div>
+                <label class="flex items-center gap-2 text-md font-bold text-gray-900 mb-3">
+                    <span class="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                    NHẬP ID NGƯỜI CHƠI
+                </label>
+                <div class="relative">
+                    <input type="text" id="player-id" placeholder="Nhập ID người chơi" 
+                           class="w-full border-2 border-gray-200 rounded-xl px-4 py-3.5 pl-4 pr-10 focus:outline-none focus:border-red-500 font-medium transition-all">
+                    <i class="fa-regular fa-user absolute right-4 top-4.5 text-gray-400 text-lg"></i>
+                </div>
+            </div>
+
+            <div>
+                <label class="flex items-center gap-2 text-md font-bold text-gray-900 mb-3">
+                    <span class="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                    CHỌN GÓI KIM CƯƠNG
+                </label>
+                
+                <div class="grid grid-cols-2 gap-3" id="diamond-grid">
+                    <div onclick="selectDiamond(this, '283 Kim cương - Gói 50x')" class="diamond-card border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer hover:border-red-400 hover:bg-red-50/30 transition-all relative">
+                        <div class="text-cyan-500 text-xl mb-1"><i class="fa-solid fa-gem"></i></div>
+                        <p class="font-bold text-lg text-gray-900">283</p>
+                        <p class="text-xs text-gray-500 font-semibold">Kim cương</p>
+                        <p class="text-xs text-gray-400 mt-1">Gói 50x</p>
+                    </div>
+                    <div onclick="selectDiamond(this, '5750 Kim cương - Gói 300x')" class="diamond-card border-2 border-red-500 bg-red-50/50 rounded-xl p-3 text-center cursor-pointer transition-all relative active-card">
+                        <div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-tr-lg rounded-bl-lg"><i class="fa-solid fa-check"></i></div>
+                        <div class="text-cyan-500 text-xl mb-1"><i class="fa-solid fa-gem"></i></div>
+                        <p class="font-bold text-lg text-red-600">5750</p>
+                        <p class="text-xs text-red-500 font-semibold">Kim cương</p>
+                        <p class="text-xs text-gray-400 mt-1">Gói 300x</p>
+                    </div>
+                    <div onclick="selectDiamond(this, '12000 Kim cương - Gói 500x')" class="diamond-card border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer hover:border-red-400 hover:bg-red-50/30 transition-all relative">
+                        <div class="text-cyan-500 text-xl mb-1"><i class="fa-solid fa-gem"></i></div>
+                        <p class="font-bold text-lg text-gray-900">12000</p>
+                        <p class="text-xs text-gray-500 font-semibold">Kim cương</p>
+                        <p class="text-xs text-gray-400 mt-1">Gói 500x</p>
+                    </div>
+                    <div onclick="selectDiamond(this, '25000 Kim cương - Gói 1000x')" class="diamond-card border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer hover:border-red-400 hover:bg-red-50/30 transition-all relative">
+                        <div class="text-cyan-500 text-xl mb-1"><i class="fa-solid fa-gem"></i></div>
+                        <p class="font-bold text-lg text-gray-900">25000</p>
+                        <p class="text-xs text-gray-500 font-semibold">Kim cương</p>
+                        <p class="text-xs text-gray-400 mt-1">Gói 1000x</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 bg-gray-50 border border-gray-200 rounded-xl p-3 text-sm">
+                    <p class="text-gray-500 font-medium">BẠN ĐÃ CHỌN</p>
+                    <p id="selected-package-text" class="font-bold text-gray-800 mt-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-gem text-cyan-500 text-xs"></i> 5750 Kim cương - Gói 300x
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <label class="flex items-center gap-2 text-md font-bold text-gray-900 mb-3">
+                    <span class="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
+                    CHỌN PHƯƠNG THỨC THANH TOÁN
+                </label>
+                
+                <div class="grid grid-cols-2 gap-3" id="payment-grid">
+                    <div onclick="selectPayment(this, 'Thẻ Garena')" class="payment-card border-2 border-red-500 bg-red-50/30 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-red-600 transition-all active-payment">
+                        <i class="fa-solid fa-ticket text-red-500 text-base"></i> Thẻ Garena
+                    </div>
+                    <div onclick="selectPayment(this, 'ATM / Ví điện tử')" class="payment-card border-2 border-gray-200 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-gray-700 hover:border-red-400 transition-all">
+                        <i class="fa-solid fa-credit-card text-blue-500 text-base"></i> ATM / Ví điện tử
+                    </div>
+                    <div onclick="selectPayment(this, 'Ví Momo')" class="payment-card border-2 border-gray-200 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-gray-700 hover:border-red-400 transition-all">
+                        <i class="fa-solid fa-wallet text-pink-500 text-base"></i> Ví Momo
+                    </div>
+                    <div onclick="selectPayment(this, 'Zalo Pay')" class="payment-card border-2 border-gray-200 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-gray-700 hover:border-red-400 transition-all">
+                        <i class="fa-solid fa-wallet text-green-500 text-base"></i> Zalo Pay
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="openModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer transition-all shadow-lg shadow-red-600/30">
+                <i class="fa-solid fa-lock"></i> Xử lý thanh toán
+            </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 mt-6 text-center text-xs">
+            <div class="bg-[#091024] p-3 rounded-xl border border-gray-800">
+                <i class="fa-solid fa-shield-halved text-cyan-400 text-lg mb-1"></i>
+                <p class="font-bold text-amber-400">AN TOÀN</p>
+                <p class="text-gray-400 scale-90">Bảo mật tuyệt đối</p>
+            </div>
+            <div class="bg-[#091024] p-3 rounded-xl border border-gray-800">
+                <i class="fa-solid fa-bolt text-amber-400 text-lg mb-1"></i>
+                <p class="font-bold text-amber-400">TỰ ĐỘNG</p>
+                <p class="text-gray-400 scale-90">Xử lý ngay lập tức</p>
+            </div>
+            <div class="bg-[#091024] p-3 rounded-xl border border-gray-800">
+                <i class="fa-solid fa-tags text-green-400 text-lg mb-1"></i>
+                <p class="font-bold text-amber-400">GIÁ TỐT</p>
+                <p class="text-gray-400 scale-90">Ưu đãi hấp dẫn</p>
+            </div>
+        </div>
+        
+        <p class="text-center text-[11px] text-gray-500 mt-6 leading-relaxed">
+            © 2026 - Trung Tâm Nạp Kim Cương Free Fire <br>
+            Không phải trang chủ của Garena. Chúng tôi chỉ hỗ trợ nạp kim cương.
+        </p>
+    </main>
+
+    <div id="success-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-sm text-center shadow-2xl animate-fade-in text-gray-800">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-200">
+                <i class="fa-solid fa-check text-2xl text-green-600"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-900">Giao dịch thành công</h3>
+            <p class="text-xs text-gray-500 mt-1">Bạn đã nạp thành công</p>
+            
+            <p id="modal-amount" class="text-2xl font-black text-red-600 my-2">5750 Kim cương</p>
+            
+            <p class="text-xs text-gray-400">vào tài khoản</p>
+            <p id="modal-uid" class="text-lg font-bold text-gray-800 tracking-wide mb-4">1234567890</p>
+            
+            <div class="border-t border-b border-gray-100 py-3 my-4 text-left text-xs space-y-2 font-medium">
+                <div class="flex justify-between"><span class="text-gray-400">Phương thức thanh toán</span><span class="text-gray-800 font-bold" id="modal-method">Thẻ Garena</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Mã giao dịch</span><span class="text-gray-700 font-mono">980543320853101600</span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Thời gian giao dịch</span><span class="text-gray-700">18/06/2026 - 15:10:42</span></div>
+            </div>
+            
+            <button onclick="closeModal()" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-all cursor-pointer">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let selectedPackage = "5750 Kim cương - Gói 300x";
+        let selectedMethod = "Thẻ Garena";
+
+        // Hàm chọn gói kim cương
+        function selectDiamond(element, packageName) {
+            selectedPackage = packageName;
+            // Reset các card khác
+            document.querySelectorAll('.diamond-card').forEach(card => {
+                card.className = "diamond-card border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer hover:border-red-400 hover:bg-red-50/30 transition-all relative";
+                const check = card.querySelector('.absolute');
+                if (check) check.remove();
+                const pName = card.querySelector('p:nth-child(2)');
+                const pSub = card.querySelector('p:nth-child(3)');
+                if (pName) pName.className = "font-bold text-lg text-gray-900";
+                if (pSub) pSub.className = "text-xs text-gray-500 font-semibold";
+            });
+            
+            // Active card hiện tại
+            element.className = "diamond-card border-2 border-red-500 bg-red-50/50 rounded-xl p-3 text-center cursor-pointer transition-all relative";
+            element.innerHTML += `<div class="absolute top-0 right-0 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-tr-lg rounded-bl-lg"><i class="fa-solid fa-check"></i></div>`;
+            element.querySelector('p:nth-child(2)').className = "font-bold text-lg text-red-600";
+            element.querySelector('p:nth-child(3)').className = "text-xs text-red-500 font-semibold";
+
+            // Cập nhật text hiển thị ở dưới
+            document.getElementById('selected-package-text').innerHTML = `<i class="fa-solid fa-gem text-cyan-500 text-xs"></i> ${packageName}`;
+        }
+
+        // Hàm chọn phương thức thanh toán
+        function selectPayment(element, methodName) {
+            selectedMethod = methodName;
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.className = "payment-card border-2 border-gray-200 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-gray-700 hover:border-red-400 transition-all";
+            });
+            element.className = "payment-card border-2 border-red-500 bg-red-50/30 rounded-xl p-3 flex items-center gap-2.5 cursor-pointer font-bold text-sm text-red-600 transition-all";
+        }
+
+        // Điều khiển Modal popup
+        function openModal() {
+            const uidInput = document.getElementById('player-id').value.trim();
+            // Nếu người dùng không nhập gì thì lấy UID giả định làm mẫu giống ảnh
+            document.getElementById('modal-uid').innerText = uidInput || "1234567890";
+            document.getElementById('modal-amount').innerText = selectedPackage.split(' - ')[0];
+            document.getElementById('modal-method').innerText = selectedMethod;
+            
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('success-modal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
