@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trung Tâm Nạp Game</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b1020;
+color:#fff;
+}
+
+header{
+background:#000;
+padding:15px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.banner{
+height:250px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(90deg,#0d1b3d,#1a237e,#000);
+font-size:40px;
+font-weight:bold;
+color:#ffd54f;
+text-align:center;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#fff;
+color:#000;
+border-radius:15px;
+padding:20px;
+margin-bottom:20px;
+}
+
+h2{
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+.packages{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.package{
+border:2px solid #ddd;
+border-radius:10px;
+padding:20px;
+text-align:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.package:hover{
+border-color:red;
+}
+
+.package.active{
+border-color:red;
+background:#fff2f2;
+}
+
+.package h3{
+font-size:30px;
+color:#e53935;
+}
+
+.methods{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.method{
+padding:15px;
+border:2px solid #ddd;
+border-radius:10px;
+text-align:center;
+cursor:pointer;
+}
+
+.method.active{
+border-color:red;
+background:#fff2f2;
+}
+
+.btn{
+width:100%;
+padding:18px;
+border:none;
+border-radius:10px;
+background:#ff1f1f;
+color:white;
+font-size:22px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.7);
+}
+
+.popup-content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+width:350px;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+.success{
+font-size:70px;
+color:#2ecc71;
+}
+
+.ok{
+width:100%;
+padding:15px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+margin-top:15px;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<header>
+TRUNG TÂM NẠP GAME
+</header>
+
+<div class="banner">
+NẠP KIM CƯƠNG NHANH CHÓNG
+</div>
+
+<div class="container">
+
+<div class="card">
+<h2>1. Nhập UID</h2>
+<input id="uid" placeholder="Nhập UID người chơi">
+</div>
+
+<div class="card">
+<h2>2. Chọn Gói Kim Cương</h2>
+
+<div class="packages">
+
+<div class="package active">💎<h3>283</h3>Gói 50x</div>
+<div class="package">💎<h3>566</h3>Gói 100x</div>
+<div class="package">💎<h3>1132</h3>Gói 150x</div>
+<div class="package">💎<h3>2830</h3>Gói 200x</div>
+<div class="package">💎<h3>5750</h3>Gói 300x</div>
+<div class="package">💎<h3>9999</h3>Gói 400x</div>
+<div class="package">💎<h3>12000</h3>Gói 500x</div>
+<div class="package">💎<h3>15000</h3>Gói 600x</div>
+
+</div>
+</div>
+
+<div class="card">
+<h2>3. Phương Thức Thanh Toán</h2>
+
+<div class="methods">
+<div class="method active">Thẻ Game</div>
+<div class="method">Momo</div>
+<div class="method">ATM</div>
+</div>
+
+<button class="btn" onclick="showPopup()">
+XỬ LÝ THANH TOÁN
+</button>
+
+</div>
+
+</div>
+
+<div class="popup" id="popup">
+<div class="popup-content">
+
+<div class="success">✔</div>
+
+<h2>Giao dịch hoàn tất</h2>
+
+<p>UID:</p>
+<h3 id="showUid">0</h3>
+
+<p style="margin-top:15px">
+Đây là giao diện mô phỏng.
+</p>
+
+<button class="ok" onclick="closePopup()">
+OK
+</button>
+
+</div>
+</div>
+
+<footer>
+© 2026 Trung Tâm Nạp Game
+</footer>
+
+<script>
+function showPopup(){
+let uid=document.getElementById("uid").value;
+document.getElementById("showUid").innerText=
+uid || "Chưa nhập UID";
+
+document.getElementById("popup").style.display="block";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+</script>
+
+</body>
+</html>
